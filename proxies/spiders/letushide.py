@@ -4,10 +4,12 @@ import scrapy
 from proxies.settings import PROXY_LIST
 from proxies.items import ProxyItem
 
+http_urls = ['http://letushide.com/protocol/http/%d' % page for page in xrange(1, 20)]
+https_urls = ['http://letushide.com/protocol/https/%d' % page for page in xrange(1, 20)]
+
 class LetushideSpider(scrapy.Spider):
     name = "letushide"
-    start_urls = ('http://letushide.com/protocol/http/',
-                  'http://letushide.com/protocol/https/')
+    start_urls = http_urls + https_urls
     allowed_domains = ('letushide.com',)
     fout = open(PROXY_LIST, 'w')
 
